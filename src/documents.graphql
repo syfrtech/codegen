@@ -1,0 +1,342 @@
+query pubJwk {
+  pub {
+    jwk
+  }
+}
+
+query packedPair($kid: String!) {
+  search {
+    keyPair(kid: $kid) {
+      ...KeyPairDetails
+    }
+  }
+}
+
+query me {
+  user {
+    me {
+      ...MyDetails
+    }
+  }
+}
+
+query user($id: UUID!) {
+  user {
+    item(id: $id) {
+      ...UserDetails
+    }
+  }
+}
+
+query usersList {
+  user {
+    list {
+      ...UserSummary
+    }
+  }
+}
+
+query org($id: UUID!) {
+  org {
+    item(id: $id) {
+      ...OrgDetails
+    }
+  }
+}
+
+query orgsList {
+  org {
+    list {
+      ...OrgSummary
+    }
+  }
+}
+
+query group($id: UUID!) {
+  group {
+    item(id: $id) {
+      ...GroupDetails
+    }
+  }
+}
+
+query groupsList {
+  group {
+    list {
+      ...GroupSummary
+    }
+  }
+}
+
+query form($id: UUID!) {
+  form {
+    item(id: $id) {
+      ...FormDetails
+    }
+  }
+}
+
+query formsList {
+  form {
+    list {
+      ...FormSummary
+    }
+  }
+}
+
+mutation login($auth: CompactJWE!) {
+  pub {
+    user {
+      auth(auth: $auth)
+    }
+  }
+}
+
+mutation register($auth: CompactJWE!, $keypair: KeyPairInput!) {
+  pub {
+    user {
+      create(auth: $auth, keyPair: $keypair)
+    }
+  }
+}
+
+mutation verify($userId: UUID!, $auth: CompactJWE!) {
+  pub {
+    user {
+      verify(userId: $userId, auth: $auth)
+    }
+  }
+}
+
+mutation createOrg($org: CreateOrgInput!) {
+  org {
+    create(org: $org) {
+      ...OrgDetails
+    }
+  }
+}
+
+mutation removeOrg($orgId: UUID!) {
+  org {
+    remove(orgId: $orgId)
+  }
+}
+
+mutation updateOrg($org: OrgUpdateInput!) {
+  org {
+    update(org: $org) {
+      id
+    }
+  }
+}
+
+mutation createGroup($group: NewGroupInput!) {
+  group {
+    create(group: $group) {
+      ...GroupSummary
+    }
+  }
+}
+
+mutation updateGroup($groupInput: GroupUpdateInput!) {
+  group {
+    update(group: $groupInput) {
+      ...GroupDetails
+    }
+  }
+}
+
+mutation createInvite($inviteInput: InviteInput!) {
+  invite {
+    create(createInvite: $inviteInput) {
+      ...InviteDetails
+    }
+  }
+}
+
+mutation createForm($form: FormInput!) {
+  form {
+    create(input: $form) {
+      ...FormSummary
+    }
+  }
+}
+
+fragment MyDetails on FullUser {
+  id
+  email
+  firstName
+  lastName
+  keyPair {
+    ...KeyPairDetails
+  }
+}
+
+fragment UserSummary on User {
+  id
+  email
+  firstName
+  lastName
+}
+
+fragment UserDetails on User {
+  id
+  email
+  firstName
+  lastName
+  publicJwk
+}
+
+fragment OrgBare on Org {
+  id
+  name
+}
+
+fragment OrgSummary on Org {
+  id
+  name
+  enabled
+  metadata {
+    #@todo fragment MetadataSummary
+    createdDate
+    lastUpdatedDate
+  }
+}
+
+fragment OrgDetails on Org {
+  id
+  name
+  enabled
+  url
+  metadata {
+    #@todo fragment MetadataSummary
+    createdDate
+    lastUpdatedDate
+  }
+  adminUser {
+    ...UserSummary
+  }
+  processor {
+    ...ProcessorDetails
+  }
+  groups {
+    ...GroupBare
+  }
+}
+
+fragment FormBare on Form {
+  id
+  name
+}
+
+fragment FormSummary on Form {
+  id
+  name
+  metadata {
+    #@todo fragment MetadataSummary
+    createdDate
+    lastUpdatedDate
+  }
+}
+
+fragment FormDetails on Form {
+  id
+  name
+  metadata {
+    #@todo fragment MetadataDetails
+    createdDate
+    createdBy {
+      ...UserSummary
+    }
+    lastUpdatedDate
+    lastUpdatedBy {
+      ...UserSummary
+    }
+    bytes
+  }
+  keyPair {
+    ...KeyPairDetails
+  }
+}
+
+fragment ProcessorDetails on PaymentProcessor {
+  stripe {
+    ...StripeProcessorDetails
+  }
+}
+
+fragment StripeProcessorDetails on StripeProcessor {
+  customerPortal
+}
+
+fragment KeyPairDetails on KeyPair {
+  publicJwk
+  privateJwe
+}
+
+fragment GroupBare on Group {
+  id
+  name
+}
+
+fragment GroupSummary on Group {
+  id
+  name
+  org {
+    ...OrgBare
+  }
+  enabled
+  metadata {
+    #@todo fragment MetadataSummary
+    createdDate
+    lastUpdatedDate
+  }
+}
+
+fragment GroupDetails on Group {
+  id
+  name
+  org {
+    ...OrgBare
+  }
+  maxMembers
+  enabled
+  metadata {
+    #@todo fragment MetadataDetails
+    createdDate
+    createdBy {
+      ...UserSummary
+    }
+    lastUpdatedDate
+    lastUpdatedBy {
+      ...UserSummary
+    }
+    bytes
+  }
+  permissions {
+    ...PermissionDetails
+  }
+  members {
+    ...UserSummary
+  }
+  keyPair {
+    ...KeyPairDetails
+  }
+}
+
+fragment InviteDetails on Invite {
+  id
+  invitedBy {
+    ...UserSummary
+  }
+  invitedUserEmail
+  groupId
+  status
+}
+
+fragment PermissionDetails on Permission {
+  type
+  isEnabled
+  title
+  description
+}

@@ -1,0 +1,109 @@
+#goal: type indicators in IDE and more: https://the-guild.dev/blog/typed-document-node
+overwrite: true
+schema:
+  #https://graphql-code-generator.com/docs/getting-started/require-field/#dotenv-integration
+  #https://github.com/dotansimha/graphql-code-generator/pull/5442
+  #https://github.com/dotansimha/graphql-code-generator/issues/5449
+  - ${APIURL}:
+      headers:
+        apikey: ${APIKEY}
+#https://graphql-config.com/usage#documents
+documents: "src/*.graphql"
+generates:
+  dist/reactQuery.ts:
+    #https://graphql-code-generator.com/docs/plugins/typescript-react-query#usage-examples
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query
+      - add:
+          placement: "prepend"
+          content: >
+            /*****************************************
+             * DO NOT EDIT.  This is a generated file.
+             *****************************************/
+      - add:
+          placement: "append"
+          content: >
+            /*
+             * JWK type is better than JsonWebKey type.  
+             * ex: JsonWebKey type doesn't recognize `kid` property.
+             * @see https://github.com/microsoft/TypeScript/issues/26854  
+             */
+            import { JWK } from "jose/webcrypto/types";
+
+            /**
+             * JWK / JsonWebKey extended with Syfr requirements
+             *
+             * `kid` must use sha256 fingerprinting (except local key): @see https://github.com/syfrapp/api/issues/77 
+             * `use` and `key_ops` required: @see https://github.com/syfrapp/api/issues/84 
+             * `jwk` spec: @see https://datatracker.ietf.org/doc/html/rfc7517 
+             * `kid` spec: @see https://datatracker.ietf.org/doc/html/rfc7638 
+             */
+            export interface SyfrJwk extends JWK {
+              use: "enc";
+              key_ops: Array<"wrapKey" | "unwrapKey">;
+              kid: string;
+            }
+    config:
+      fetcher: graphql-request
+      exposeQueryKeys: true
+      preResolveTypes: true
+      skipTypename: true
+      scalars:
+        CompactJWE: string
+        DateTime: string
+        Email: string
+        JWK: JWK
+        JWT: string
+        Map: object
+        UUID: string
+        Url: string
+        Void: null
+  dist/graphqlRequest.ts:
+    #https://graphql-code-generator.com/docs/plugins/typescript-react-query#usage-examples
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request
+      - add:
+          placement: "prepend"
+          content: >
+            /*****************************************
+             * DO NOT EDIT.  This is a generated file.
+             *****************************************/
+      - add:
+          placement: "append"
+          content: >
+            /*
+             * JWK type is better than JsonWebKey type.  
+             * ex: JsonWebKey type doesn't recognize `kid` property.
+             * @see https://github.com/microsoft/TypeScript/issues/26854  
+             */
+            import { JWK } from "jose/webcrypto/types";
+
+            /**
+             * JWK / JsonWebKey extended with Syfr requirements
+             *
+             * `kid` must use sha256 fingerprinting (except local key): @see https://github.com/syfrapp/api/issues/77 
+             * `use` and `key_ops` required: @see https://github.com/syfrapp/api/issues/84 
+             * `jwk` spec: @see https://datatracker.ietf.org/doc/html/rfc7517 
+             * `kid` spec: @see https://datatracker.ietf.org/doc/html/rfc7638 
+             */
+            export interface SyfrJwk extends JWK {
+              use: "enc";
+              key_ops: Array<"wrapKey" | "unwrapKey">;
+              kid: string;
+            }
+    config:
+      preResolveTypes: true
+      scalars:
+        CompactJWE: string
+        DateTime: string
+        Email: string
+        JWK: JWK
+        JWT: string
+        Map: object
+        UUID: string
+        Url: string
+        Void: null

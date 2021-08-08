@@ -2,7 +2,7 @@ schema:
   - ${SYFR_API_TS_SDK_URL}:
       headers:
         apikey: ${SYFR_API_TS_SDK_KEY}
-documents: ./src/*.graphql
+documents: ${SYFR_API_TS_SDK_INPUTDOCS_GLOB}
 overwrite: true
 generates:
   ${SYFR_API_TS_SDK_OUTPUT_PATH}/reactQuery.ts:

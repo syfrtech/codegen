@@ -1,11 +1,11 @@
 schema:
-  - ${SYFR_API_URL}:
+  - ${SYFR_API_TS_SDK_URL}:
       headers:
-        apikey: ${SYFR_API_KEY}
-documents: ${SYFR_API_CODEGEN_PATH}/src/*.graphql
+        apikey: ${SYFR_API_TS_SDK_KEY}
+documents: ${SYFR_API_TS_SDK_INPUT_PATH}/src/*.graphql
 overwrite: true
 generates:
-  ${SYFR_API_SDK_PATH}/reactQuery.ts:
+  ${SYFR_API_TS_SDK_OUTPUT_PATH}/reactQuery.ts:
     plugins:
       - typescript
       - typescript-operations
@@ -54,7 +54,7 @@ generates:
         UUID: string
         Url: string
         Void: null
-  ${SYFR_API_SDK_PATH}/graphqlRequest.ts:
+  ${SYFR_API_TS_SDK_OUTPUT_PATH}/graphqlRequest.ts:
     #https://graphql-code-generator.com/docs/plugins/typescript-react-query#usage-examples
     plugins:
       - typescript

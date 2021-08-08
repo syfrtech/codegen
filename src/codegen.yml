@@ -1,17 +1,11 @@
-#goal: type indicators in IDE and more: https://the-guild.dev/blog/typed-document-node
-overwrite: true
 schema:
-  #https://graphql-code-generator.com/docs/getting-started/require-field/#dotenv-integration
-  #https://github.com/dotansimha/graphql-code-generator/pull/5442
-  #https://github.com/dotansimha/graphql-code-generator/issues/5449
-  - ${APIURL}:
+  - ${SYFR_API_URL}:
       headers:
-        apikey: ${APIKEY}
-#https://graphql-config.com/usage#documents
-documents: "src/*.graphql"
+        apikey: ${SYFR_API_KEY}
+documents: ${SYFR_API_CODEGEN_PATH}/src/*.graphql
+overwrite: true
 generates:
-  dist/reactQuery.ts:
-    #https://graphql-code-generator.com/docs/plugins/typescript-react-query#usage-examples
+  ${SYFR_API_SDK_PATH}/reactQuery.ts:
     plugins:
       - typescript
       - typescript-operations
@@ -60,7 +54,7 @@ generates:
         UUID: string
         Url: string
         Void: null
-  dist/graphqlRequest.ts:
+  ${SYFR_API_SDK_PATH}/graphqlRequest.ts:
     #https://graphql-code-generator.com/docs/plugins/typescript-react-query#usage-examples
     plugins:
       - typescript

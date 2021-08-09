@@ -1,7 +1,7 @@
 schema:
-  - ${SYFR_API_TS_SDK_URL}:
+  - ${SYFR_API_URL}:
       headers:
-        apikey: ${SYFR_API_TS_SDK_KEY}
+        apikey: ${SYFR_API_KEY}
 documents: ${SYFR_API_TS_SDK_INPUTDOCS_GLOB}
 overwrite: true
 generates:

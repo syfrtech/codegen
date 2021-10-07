@@ -1,6 +1,6 @@
 {
   "name": "syfr-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": ".src/index.js",
   "license": "none",
   "private": true,
@@ -18,9 +18,10 @@
     "graphql": "^15.5.1",
     "graphql-request": "^3.5.0",
     "graphql-tag": "^2.12.5",
-    "jose": "^3.14.3"
+    "jose": "^3.20.1"
   },
   "devDependencies": {
-    "typescript": "^4.3.5"
+    "react-query": "^3.25.1",
+    "typescript": "^4.4.3"
   }
 }

@@ -1,22 +1,21 @@
 {
   "name": "syfr-sdk-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": ".src/index.js",
   "license": "none",
   "private": true,
-  "peerDependencies": {
-    "dotenv": "^10.0.0",
-    "graphql": "^16.0.1",
-    "graphql-request": "^3.6.1",
-    "graphql-tag": "^2.12.6",
-    "jose": "^4.3.7",
-    "react-query": "^3.33.1",
-    "typescript": "^4.5.2",
+  "dependencies": {
     "@graphql-codegen/add": "^3.1.0",
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/typescript": "^2.4.1",
     "@graphql-codegen/typescript-graphql-request": "^4.3.1",
     "@graphql-codegen/typescript-operations": "^2.2.1",
-    "@graphql-codegen/typescript-react-query": "^3.2.1"
+    "@graphql-codegen/typescript-react-query": "^3.2.1",
+    "dotenv": "^10.0.0",
+    "graphql": "^16.0.1",
+    "graphql-request": "^3.6.1",
+    "graphql-tag": "^2.12.6",
+    "jose": "^4.3.7",
+    "typescript": "^4.5.2"
   }
 }

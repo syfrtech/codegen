@@ -1,10 +1,10 @@
 {
   "name": "syfr-sdk-js",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": ".src/index.js",
   "license": "none",
   "private": true,
-  "devDependencies": {
+  "dependencies": {
     "@graphql-codegen/add": "^3.1.0",
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/typescript": "^2.4.1",

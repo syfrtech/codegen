@@ -1,6 +1,6 @@
 # Syfr SDK-JS
 
-Currently v1.0.6
+Currently v1.0.7
 
 This tool generates SDKs for client use (ex: react-query typescript). Other SDKs may be developed in the future, particularly those languages supported by https://www.graphql-code-generator.com/
 

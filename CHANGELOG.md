@@ -1,3 +1,10 @@
+### [1.0.8](https://github.com/syfrapp/sdk/compare/1.0.7...1.0.8) (2022-02-02)
+
+
+### Fixes
+
+* stop git push ([4237ba6](https://github.com/syfrapp/sdk/commit/4237ba6654c5e3246fcfdfdb76767783087fe2f2))
+
 ### 1.0.7 (2021-12-24)
 
 

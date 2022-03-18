@@ -1,3 +1,5 @@
+### [1.0.11](https://github.com/syfrtech/codegen/compare/1.0.11-0...1.0.11) (2022-03-18)
+
 ### [1.0.11-0](https://github.com/syfrtech/codegen/compare/1.0.10...1.0.11-0) (2022-03-18)
 
 ### [1.0.10](https://github.com/syfrapp/sdk/compare/1.0.9...1.0.10) (2022-02-12)
